@@ -1,8 +1,8 @@
 <?php
 
-require_once('MinStackAbstract.php');
 require_once('MinStack.php');
-require_once('MinStackTrack.php');
+require_once('MinStackNative.php');
+require_once('MinStackManual.php');
 
 function output($value, $label=null)
 {
@@ -22,7 +22,7 @@ function output($value, $label=null)
  * @param MinStack $s, int n
  * @return MinStack $s
  */
-function stress(MinStackAbstract $s, $n)
+function stress(MinStack $s, $n)
 {
     foreach (range(0, $n / 2) as $i) {
         $s->push(rand());
@@ -43,7 +43,7 @@ function stress(MinStackAbstract $s, $n)
 }
 
 $n = 2000000;
-$s = new MinStack();
+$s = new MinStackNative();
 
 $start = round(microtime(true) * 1000);
 stress($s, $n);
@@ -53,7 +53,7 @@ $time = $finish - $start;
 output("$time ms", "native time for $n iterations");
 
 
-$s = new MinStackTrack();
+$s = new MinStackManual();
 
 $start = round(microtime(true) * 1000);
 stress($s, $n);

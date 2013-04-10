@@ -4,7 +4,7 @@
  * MinStack implementation using manual tracking of the end of
  * the inner "stack" arrays.
  */
-class MinStackTrack extends MinStackAbstract
+class MinStackManual extends MinStack
 {
     protected $_dataEnd;
     protected $_minsEnd;

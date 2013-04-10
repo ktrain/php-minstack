@@ -23,6 +23,9 @@ element on the stack, and thus do not need to later be recalled.
 Conversely, new elements that are lesser than the current minimum will need to be recalled in the
 reverse order in which they were pushed; thus a simple secondary stack can be used to track them.
 
+This brought up an interesting question:
+what is the most efficient way to treat an array as a stack in PHP?
+
 
 ### Two Implementations
 

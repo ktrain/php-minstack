@@ -1,72 +1,57 @@
 <?php
 
-/**
- * MinStack implementation using native PHP methods to
- * access and modify the inner "stack" arrays.
- */
-class MinStack extends MinStackAbstract
+abstract class MinStack
 {
-    /**
-     * @return the top element of the stack
-     */
-    public function top()
-    {
-        if (empty($this->_data)) {
-            return null;
-        }
+    protected $_data;
+    protected $_mins;
 
-        // I thought that these end() calls,
-        // combined with array_pop() which calls reset()
-        // on the array, would slow down the native stack.
-        // Apparently not!
-        return end($this->_data);
+    public function __construct()
+    {
+        $this->_data = array();
+        $this->_mins = array();
     }
 
     /**
-     * Adds an element to the top of the stack.
+     * Clears the stack.
+     *
+     * @return $this
+     */
+    public function clear()
+    {
+        $this->_data = array();
+        $this->_mins = array();
+
+        return $this;
+    }
+
+    /**
+     * Returns the value of the top element on the stack.
+     * Does not modify the stack.
+     *
+     * @return int
+     */
+    abstract function top();
+
+    /**
+     * Adds $i to the top of the stack.
      *
      * @param int $i
      * @return $i
      */
-    public function push($i)
-    {
-        if (empty($this->_mins) || $i < $this->min()) {
-            $this->_mins[] = $i;
-        }
-
-        $this->_data[] = $i;
-        return $i;
-    }
+    abstract function push($i);
 
     /**
-     * Removes and returns the top element of the stack.
+     * Removes and returns the top element on the stack.
      *
-     * @return the top element of the stack (null if stack empty)
+     * @return int
      */
-    public function pop()
-    {
-        if (empty($this->_data)) {
-            return null;
-        }
-
-        if ($this->top() === $this->min()) {
-            // array_pop reset()s the array,
-            // but doesn't seem to slow down top() or min()
-            array_pop($this->_mins);
-        }
-
-        return array_pop($this->_data);
-    }
+    abstract function pop();
 
     /**
-     * @return the minimum element in the stack (null if stack empty)
+     * Returns the value of the minimum element in the stack.
+     * Does not modify the stack.
+     *
+     * @return int
      */
-    public function min()
-    {
-        if (empty($this->_mins)) {
-            return null;
-        }
-
-        return end($this->_mins);
-    }
+    abstract function min();
 }
