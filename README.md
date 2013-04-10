@@ -56,11 +56,16 @@ I was not even sure if this would be a true O(1) implementation.
 However, according to the included test script, the native implementation is actually
 faster than the manually-tracked implementation.
 
+*Note that [```array_push()```](http://ca1.php.net/manual/en/function.array-push.php)
+is not used in ```push()``` because the function documentation itself does not recommend its
+use for pushing single elements.*
+
 
 ### Test Results
 
-The test script currently pushes 1,000,000 elements on one stack type
-and then randomly pushes or pops 2,000,000 times.
+The test script currently pushes 1,000,000 elements and then randomly pushes or pops 2,000,000 times.
+After each push or pop, both ```min()``` and ```top()``` are called.
+This is done for each stack implementation, and the respective times to complete are output.
 
 *Note that running the test script currently requires ```memory_limit``` to be set to at least 1024M.*
 
@@ -88,3 +93,5 @@ manual time for 2000000 iterations: [14986 ms]
 
 Not much differential, but the native implementation is consistently faster.
 Who knows what's going on in the depths of PHP ...
+
+###### Can you improve the stack's performance? Let me know!
